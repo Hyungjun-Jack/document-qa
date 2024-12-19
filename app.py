@@ -10,6 +10,8 @@ from langchain_community.vectorstores import FAISS
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.schema.runnable import RunnablePassthrough, RunnableLambda
 
+import os
+
 st.set_page_config(
     page_title="Assignment 6",
     page_icon="😍",
@@ -107,6 +109,11 @@ def make_llm(api_key):
     show_spinner="Embedding file...",
 )
 def embed_file(file):
+    try:
+        os.makedirs("./.cache/files")
+    except:
+        pass
+
     file_content = file.read()
     file_path = f"./.cache/files/{file.name}"
 
